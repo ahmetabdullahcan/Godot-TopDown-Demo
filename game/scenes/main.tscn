@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://b3j3xbhcuetq5"]
+[gd_scene load_steps=8 format=4 uid="uid://b3j3xbhcuetq5"]
 
 [ext_resource type="Shader" uid="uid://o4emc6rms753" path="res://assets/tile_sets/shaders/sea.gdshader" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://bx40bowsnstoq" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://cxfbwk1tqbyje" path="res://assets/tile_sets/Grass.png" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://cvwbwpskhi6tf" path="res://prefabs/character/character.tscn" id="3_sugp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sugp2"]
 shader = ExtResource("1_0wfyh")
@@ -90,6 +92,7 @@ texture = ExtResource("1_o5qli")
 sources/0 = SubResource("TileSetAtlasSource_0wfyh")
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_jyhfs")
 
 [node name="sea" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_sugp2")
@@ -102,5 +105,9 @@ offset_bottom = 301.0
 tile_map_data = PackedByteArray("AAD9//7/AAABAAEAAAD9////AAACAAUAAAD9/wAAAAABAAEAAAD9/wEAAAABAAEAAAD+//7/AAABAAEAAAD+////AAABAAEAAAD+/wAAAAABAAEAAAD+/wEAAAAAAAUAAAD///7/AAAAAAUAAAD/////AAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAAAAP7/AAABAAEAAAAAAP//AAABAAEAAAAAAAAAAAABAAYAAAAAAAEAAAABAAEAAAABAP7/AAABAAEAAAABAP//AAABAAEAAAABAAAAAAABAAEAAAABAAEAAAABAAEAAAACAP7/AAABAAEAAAACAP//AAABAAYAAAACAAAAAAABAAEAAAACAAEAAAABAAEAAAADAP7/AAACAAEAAAADAP//AAACAAEAAAADAAAAAAACAAEAAAADAAEAAAACAAEAAAD8//7/AAAAAAEAAAD8////AAAAAAEAAAD8/wAAAAAAAAEAAAD8/wEAAAAAAAEAAAD9//3/AAABAAAAAAD+//3/AAABAAAAAAD///3/AAABAAAAAAAAAP3/AAABAAAAAAABAP3/AAABAAAAAAACAP3/AAABAAAAAAD9/wIAAAABAAIAAAD+/wIAAAABAAIAAAD//wIAAAABAAIAAAAAAAIAAAABAAIAAAABAAIAAAABAAIAAAACAAIAAAABAAIAAAADAAIAAAACAAIAAAD8/wIAAAAAAAIAAAD8//3/AAAAAAAAAAADAP3/AAACAAAAAAA=")
 tile_set = SubResource("TileSet_sugp2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Character" parent="." instance=ExtResource("3_sugp2")]
+
+[node name="Camera2D" type="Camera2D" parent="Character"]
 zoom = Vector2(5, 5)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
