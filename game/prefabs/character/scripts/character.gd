@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@export var speed = 25
+@export var speed = 35
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -29,6 +29,12 @@ func update_animation(direction: Vector2) -> void:
 func _physics_process(delta: float) -> void:
 	var input_vec = Input.get_vector("MOVE_LEFT", "MOVE_RIGHT", "MOVE_UP", "MOVE_DOWN").normalized()
 	var cardinal_dir = get_cardinal_direction(input_vec)
+	
 	velocity = input_vec * speed
 	move_and_slide()
-	update_animation(cardinal_dir)
+
+	# Gerçek hareketi kontrol et (çarpışmadan dolayı duruyorsa algıla)
+	if velocity.length() < 1.0:
+		update_animation(Vector2.ZERO)
+	else:
+		update_animation(cardinal_dir)
