@@ -232,6 +232,8 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 script = ExtResource("1_o6vhl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5.000001)
+scale = Vector2(0.35999942, 0.3999982)
 shape = SubResource("CircleShape2D_53knk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
