@@ -31,10 +31,10 @@ func _physics_process(delta: float) -> void:
 	var cardinal_dir = get_cardinal_direction(input_vec)
 	
 	velocity = input_vec * speed
+	
 	move_and_slide()
-
-	# Gerçek hareketi kontrol et (çarpışmadan dolayı duruyorsa algıla)
-	if velocity.length() < 1.0:
+	
+	if velocity == Vector2.ZERO:
 		update_animation(Vector2.ZERO)
 	else:
 		update_animation(cardinal_dir)
