@@ -1,7 +1,10 @@
 extends CharacterBody2D
 
 @onready var animation_tree: AnimationTree = $AnimationTree
-@export var speed = 35
+const max_speed = 40
+const accel = 150
+const friction = 600
+var input = Vector2.ZERO
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -16,6 +19,29 @@ func get_cardinal_direction(vec: Vector2) -> Vector2:
 	else:
 		return Vector2(0, sign(vec.y))
 
+func get_input():
+	input.x = int(Input.is_action_pressed("MOVE_RIGHT")) - int(Input.is_action_pressed("MOVE_LEFT"))
+	input.y = int(Input.is_action_pressed("MOVE_DOWN")) - int(Input.is_action_pressed("MOVE_UP"))
+	
+	return (input.normalized())
+
+func player_movement(delta):
+	input = get_input()
+	
+	if input == Vector2.ZERO:
+		if (velocity.length() > (friction * delta)):
+			velocity -= velocity.normalized() * (friction * delta)
+		else:
+			velocity = Vector2.ZERO
+	else:
+		velocity += (input * accel * delta)
+		velocity = velocity.limit_length(max_speed)
+	if velocity == Vector2.ZERO or (abs(velocity.x) <= 3.5 and abs(velocity.y) <= 3.5):
+		update_animation(Vector2.ZERO)
+	else:
+		update_animation(velocity)
+	move_and_slide()
+
 func update_animation(direction: Vector2) -> void:
 	if direction != Vector2.ZERO:
 		animation_tree.set("parameters/conditions/is_moving", true)
@@ -27,14 +53,4 @@ func update_animation(direction: Vector2) -> void:
 		animation_tree.set("parameters/conditions/is_idle", true)
 
 func _physics_process(delta: float) -> void:
-	var input_vec = Input.get_vector("MOVE_LEFT", "MOVE_RIGHT", "MOVE_UP", "MOVE_DOWN").normalized()
-	var cardinal_dir = get_cardinal_direction(input_vec)
-	
-	velocity = input_vec * speed
-	
-	move_and_slide()
-	
-	if velocity == Vector2.ZERO:
-		update_animation(Vector2.ZERO)
-	else:
-		update_animation(cardinal_dir)
+	player_movement(delta)

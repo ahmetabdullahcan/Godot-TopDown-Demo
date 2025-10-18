@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://bddf6drj8wtix" path="res://assets/character_sheets/Basic Character Spritesheet.png" id="1_cs6s8"]
 [ext_resource type="Script" uid="uid://cexa2bi8n51n4" path="res://prefabs/character/scripts/character.gd" id="1_o6vhl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_53knk"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6vhl"]
+size = Vector2(16.666693, 17.50003)
 
 [sub_resource type="Animation" id="Animation_xofgc"]
 resource_name = "IDLE_DOWN"
@@ -232,9 +233,9 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 script = ExtResource("1_o6vhl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5.000001)
+position = Vector2(-5.9604645e-08, 4.5000095)
 scale = Vector2(0.35999942, 0.3999982)
-shape = SubResource("CircleShape2D_53knk")
+shape = SubResource("RectangleShape2D_o6vhl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cs6s8")
