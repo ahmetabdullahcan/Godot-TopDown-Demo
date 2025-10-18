@@ -6,4 +6,4 @@ This is a small demo project I'm working on.
 
 Here's a quick preview of the demo:
 
-![Day 2 Preview](media/day2.gif)
+![Day 3 Preview](media/day3.gif)
